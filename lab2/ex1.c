@@ -1,11 +1,15 @@
+/* Παράδειγμα 1 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-void main()
-{
-    printf("Η ημερομηνία είναι :\n");
-    execv("/bin/date", 0);               /* το 0 οριοθετεί το τέλος της λίστας ορισμάτων */
-    printf("Αυτή ήταν η ημερομηνία \n"); /* Δεν εκτελείται ποτέ καθώς η διεργασία
-   αυτή επικαλύπτεται με την καλούμενη κλήση
-   date με τη χρήση της execv() */
+int main(void) {
+  char *args[] = {"/bin/date", NULL};
+
+  printf("Η ημερομηνία είναι:\n");
+
+  execv("/bin/date", args);
+
+  perror("execv");
+  return 1;
 }
